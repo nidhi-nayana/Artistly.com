@@ -32,7 +32,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Check, ChevronsUpDown, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import useLocalStorage from '@/hooks/use-local-storage';
 import { useRouter } from 'next/navigation';
 
@@ -92,7 +92,7 @@ const MultiSelectPopover = ({
   );
 };
 
-export default function OnboardingForm() {
+function OnboardingFormContent() {
   const { toast } = useToast();
   const router = useRouter();
   const [storedArtists, setStoredArtists] = useLocalStorage<OnboardingFormValues[]>('onboarded-artists', []);
@@ -273,5 +273,25 @@ export default function OnboardingForm() {
         </Form>
       </CardContent>
     </Card>
+  );
+}
+
+export default function OnboardingForm() {
+  return (
+    <Suspense fallback={
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="font-headline">Artist Profile</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin" />
+            <span className="ml-2">Loading form...</span>
+          </div>
+        </CardContent>
+      </Card>
+    }>
+      <OnboardingFormContent />
+    </Suspense>
   );
 }
