@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import type { Artist } from '@/lib/types';
+import type { Artist, ArtistCategory } from '@/lib/types';
 import { MapPin, Mic, Disc, Clapperboard, Drama } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -13,12 +13,19 @@ interface ArtistCardProps {
   layout?: 'grid' | 'list';
 }
 
-const categoryIcons = {
+const categoryIcons: Record<ArtistCategory, React.ReactNode> = {
     Singer: <Mic className="w-4 h-4" />,
     DJ: <Disc className="w-4 h-4" />,
     Dancer: <Clapperboard className="w-4 h-4" />,
     Speaker: <Drama className="w-4 h-4" />,
 }
+
+const categoryHints: Record<ArtistCategory, string> = {
+  Singer: 'singer musician',
+  DJ: 'dj turntable',
+  Dancer: 'dancer performance',
+  Speaker: 'speaker conference',
+};
 
 export default function ArtistCard({ artist, layout = 'grid' }: ArtistCardProps) {
 
@@ -37,6 +44,7 @@ export default function ArtistCard({ artist, layout = 'grid' }: ArtistCardProps)
         alt={artist.name}
         width={400}
         height={400}
+        data-ai-hint={categoryHints[artist.category] || 'artist portrait'}
         className={cn(
           "object-cover aspect-square w-full",
           layout === 'list' ? 'sm:h-full rounded-l-lg' : 'rounded-t-lg',

@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useMemo, useEffect, Suspense } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { artists as allArtists } from '@/lib/data';
+import { artists as staticArtists } from '@/lib/data';
 import type { Artist, ArtistCategory, FeeRange, OnboardingFormValues, Language } from '@/lib/types';
 import ArtistCard from './artist-card';
 import ArtistFilters from './artist-filters';
@@ -10,10 +10,11 @@ import { Button } from '@/components/ui/button';
 import { List, LayoutGrid } from 'lucide-react';
 import useLocalStorage from '@/hooks/use-local-storage';
 
-function ArtistListingContent() {
+export default function ArtistListingPage() {
   const searchParams = useSearchParams();
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
   const [onboardedArtists] = useLocalStorage<OnboardingFormValues[]>('onboarded-artists', []);
+  const [combinedArtists, setCombinedArtists] = useState<Artist[]>(staticArtists);
 
   const [filters, setFilters] = useState({
     category: 'All',
@@ -28,24 +29,27 @@ function ArtistListingContent() {
     }
   }, [searchParams]);
 
-  const combinedArtists = useMemo(() => {
-    const newArtists: Artist[] = onboardedArtists.map(formValue => ({
-      id: new Date().getTime().toString() + formValue.name,
+  useEffect(() => {
+    const newArtists: Artist[] = onboardedArtists.map((formValue, index) => ({
+      // Using a more stable ID to prevent hydration issues
+      id: `onboarded-${index}-${formValue.name.replace(/\s+/g, '-')}`,
       name: formValue.name,
       category: formValue.categories[0] as ArtistCategory,
       location: formValue.location,
       feeRange: formValue.feeRange as FeeRange,
       bio: formValue.bio,
-      image: 'https://placehold.co/400x400.png',
+      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&h=400&fit=crop&auto=format',
       languages: formValue.languages as Language[],
     }));
     
-    const all = [...allArtists, ...newArtists];
+    const all = [...staticArtists, ...newArtists];
     // Combine and remove potential duplicates based on name and location
-    return all.filter((artist, index, self) =>
+    const uniqueArtists = all.filter((artist, index, self) =>
       index === self.findIndex((a) => a.name === artist.name && a.location === artist.location)
     );
+    setCombinedArtists(uniqueArtists);
   }, [onboardedArtists]);
+
 
   const locations = useMemo(() => {
     return ['All', ...Array.from(new Set(combinedArtists.map(a => a.location)))];
@@ -114,24 +118,5 @@ function ArtistListingContent() {
         </div>
       )}
     </div>
-  );
-}
-
-export default function ArtistListingPage() {
-  return (
-    <Suspense fallback={
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl font-headline">
-            Discover Our Artists
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Loading artists...
-          </p>
-        </div>
-      </div>
-    }>
-      <ArtistListingContent />
-    </Suspense>
   );
 }

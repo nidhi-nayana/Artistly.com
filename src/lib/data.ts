@@ -2,13 +2,43 @@ import type { Artist } from './types';
 
 export const artists: Artist[] = [
   {
+    id: '9',
+    name: 'Arijit Singh',
+    category: 'Singer',
+    location: 'Mumbai, IN',
+    feeRange: '$2500+',
+    bio: 'Renowned for his soulful and versatile voice, Arijit Singh is one of the most celebrated playback singers in the Indian music industry.',
+    image: 'https://m.media-amazon.com/images/I/41Sw+cnS4XL._UF1000,1000_QL80_.jpg',
+    languages: ['Hindi', 'English'],
+  },
+  {
+    id: '10',
+    name: 'Shreya Ghoshal',
+    category: 'Singer',
+    location: 'Mumbai, IN',
+    feeRange: '$2500+',
+    bio: 'A leading Indian playback singer with a melodious voice. She has recorded songs for films and albums in various Indian languages.',
+    image: 'https://i0.wp.com/www.socialnews.xyz/wp-content/uploads/2025/05/09/202505093399948.jpg?quality=80&zoom=1&ssl=1',
+    languages: ['Hindi', 'English'],
+  },
+  {
+    id: '11',
+    name: 'Sonu Nigam',
+    category: 'Singer',
+    location: 'Mumbai, IN',
+    feeRange: '$2500+',
+    bio: 'A legendary Indian singer, music director, and actor. Known for his incredibly versatile voice and his vast catalog of hit songs in multiple languages.',
+    image: 'https://static.wixstatic.com/media/fd4e75_995aec3e6ba244529d3305024f599e57~mv2.png/v1/fill/w_1480,h_812,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/fd4e75_995aec3e6ba244529d3305024f599e57~mv2.png',
+    languages: ['Hindi', 'English'],
+  },
+  {
     id: '1',
     name: 'Elena Vox',
     category: 'Singer',
     location: 'New York, NY',
     feeRange: '$1000 - $2500',
     bio: 'Soulful vocalist with a powerful stage presence, known for her captivating performances of jazz and blues classics. Trained at Juilliard.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English', 'Spanish'],
   },
   {
@@ -18,7 +48,7 @@ export const artists: Artist[] = [
     location: 'Miami, FL',
     feeRange: '$2500+',
     bio: 'High-energy DJ specializing in electronic dance music and hip-hop. Has performed at major festivals including Ultra and Tomorrowland.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English'],
   },
   {
@@ -28,7 +58,7 @@ export const artists: Artist[] = [
     location: 'Los Angeles, CA',
     feeRange: '$500 - $1000',
     bio: 'Versatile contemporary dancer and choreographer. Her expressive movements tell compelling stories, leaving audiences mesmerized.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English', 'French'],
   },
   {
@@ -38,7 +68,7 @@ export const artists: Artist[] = [
     location: 'Chicago, IL',
     feeRange: '$2500+',
     bio: 'Motivational speaker and author focusing on leadership and innovation. His engaging talks inspire audiences to achieve their full potential.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English'],
   },
   {
@@ -48,7 +78,7 @@ export const artists: Artist[] = [
     location: 'Nashville, TN',
     feeRange: '$500 - $1000',
     bio: 'Acoustic singer-songwriter with a folk-pop style. His heartfelt lyrics and smooth melodies are perfect for intimate events.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1526218626217-dc65a29bb444?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English'],
   },
   {
@@ -58,7 +88,7 @@ export const artists: Artist[] = [
     location: 'Las Vegas, NV',
     feeRange: '$1000 - $2500',
     bio: 'Renowned for his open-format sets, blending genres from funk to house. The life of any party and a master of the dance floor.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English'],
   },
    {
@@ -68,7 +98,7 @@ export const artists: Artist[] = [
     location: 'New York, NY',
     feeRange: '$1000 - $2500',
     bio: 'A dynamic hip-hop and breakdance crew that brings explosive energy and incredible acrobatic skills to every performance.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English'],
   },
   {
@@ -78,7 +108,7 @@ export const artists: Artist[] = [
     location: 'San Francisco, CA',
     feeRange: '$1000 - $2500',
     bio: 'Tech entrepreneur and futurist who speaks on the impact of artificial intelligence and the future of work. A thought-leader from Silicon Valley.',
-    image: 'https://placehold.co/400x400.png',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=400&h=400&fit=crop&auto=format',
     languages: ['English', 'German'],
   },
 ];

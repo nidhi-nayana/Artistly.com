@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Music } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeToggle } from './theme-toggle';
 
 const navLinks = [
@@ -16,7 +16,7 @@ const navLinks = [
   { href: '/dashboard', label: 'Dashboard' },
 ];
 
-function HeaderContent() {
+export default function Header() {
   const pathname = usePathname();
   const [isSheetOpen, setSheetOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -31,14 +31,14 @@ function HeaderContent() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <div className="flex flex-1 justify-start">
-          <Link href="/" className="flex items-center gap-2 font-bold text-lg font-headline">
+          <Link href="/" className="flex items-center gap-2 font-brand text-2xl">
             <Music className="h-6 w-6 text-primary" />
             Artistly
           </Link>
         </div>
 
         <nav className="hidden md:flex flex-1 justify-center">
-          <div className="flex items-center space-x-8 text-sm font-medium">
+          <div className="flex items-center space-x-12 text-sm font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -65,7 +65,7 @@ function HeaderContent() {
             </SheetTrigger>
             <SheetContent side="right">
               <div className="p-4">
-                <Link href="/" className="flex items-center gap-2 font-bold text-lg font-headline mb-8" onClick={closeSheet}>
+                <Link href="/" className="flex items-center gap-2 font-brand text-2xl mb-8" onClick={closeSheet}>
                   <Music className="h-6 w-6 text-primary" />
                   Artistly
                 </Link>
@@ -93,27 +93,5 @@ function HeaderContent() {
         </div>
       </div>
     </header>
-  );
-}
-
-export default function Header() {
-  return (
-    <Suspense fallback={
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center">
-          <div className="flex flex-1 justify-start">
-            <Link href="/" className="flex items-center gap-2 font-bold text-lg font-headline">
-              <Music className="h-6 w-6 text-primary" />
-              Artistly
-            </Link>
-          </div>
-          <div className="flex flex-1 items-center justify-end space-x-2">
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-    }>
-      <HeaderContent />
-    </Suspense>
   );
 }
