@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { artists as staticArtists } from '@/lib/data';
 import type { Artist, ArtistCategory, FeeRange, OnboardingFormValues, Language } from '@/lib/types';
@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { List, LayoutGrid } from 'lucide-react';
 import useLocalStorage from '@/hooks/use-local-storage';
 
-export default function ArtistListingPage() {
+function ArtistListingContent() {
   const searchParams = useSearchParams();
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
   const [onboardedArtists] = useLocalStorage<OnboardingFormValues[]>('onboarded-artists', []);
@@ -118,5 +118,24 @@ export default function ArtistListingPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ArtistListingPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl font-headline">
+            Discover Our Artists
+          </h1>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Loading artists...
+          </p>
+        </div>
+      </div>
+    }>
+      <ArtistListingContent />
+    </Suspense>
   );
 }
